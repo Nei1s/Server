@@ -2,15 +2,16 @@ const express = require('express');
 const app = express();
 
 app.get('/dynamic', (req, res) => {
-    const { a, b, c } = req.query;
+  const { a, b, c } = req.query;
 
-  if (a === undefined || b === undefined || c === undefined) {
+  if (a == null && isNaN(a) || b == null && isNaN(b) || c == null && isNaN(c)) {
     res.json({ header: 'Error' });
     return;
   }
-
-  const result = (a * b * c) / 3;
-  res.json({ header: 'Calculated', body: result.toString() });
+  else {
+    const result = (a * b * c) / 3;
+    res.json({ header: 'Calculated', body: result.toString() });
+  }
 });
 
 app.get('/static', (req, res) => {
